@@ -1,0 +1,11 @@
+{
+  "name": "sip",
+  "version": "0.0.0",
+  "description": "Terminal assistant to search and install node packages.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "L-lawliet07",
+  "license": "ISC"
+}
