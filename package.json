@@ -15,14 +15,6 @@
     "inquirer": "^5.1.0",
     "inquirer-checkbox-plus-prompt": "^1.0.1",
     "inquirer-table-prompt": "^0.2.1",
-    "ora": "^4.0.3",
-    "spyc": "^0.1.1",
-    "temp": "^0.9.1",
-    "temp-dir": "^2.0.0",
-    "temp-dir-cp": "^1.0.1",
-    "temp-path": "^1.0.0",
-    "temp-preboot": "^5.0.2",
-    "temp-sandbox": "^4.0.1",
-    "temp-write": "^4.0.0"
+    "ora": "^4.0.3"
   }
 }
