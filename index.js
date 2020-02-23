@@ -1,5 +1,5 @@
 ///////////////////////////////////////////
-//@author : Mandeep Bisht
+//@author: Mandeep Bisht
 ///////////////////////////////////////////
 
 'use strict'
@@ -24,7 +24,7 @@ const table = require("inquirer-table-prompt");
 //Spinner
 const ora = require('ora');
 
-
+const chalk = require('chalk');
 
 /*****************
  * Function to search and select packages
@@ -70,11 +70,14 @@ function getPackage() {
                 });
 
                 req.on('error', function (err) {
-                    reject(err);
+                    return reject(err);
                 });
 
                 req.end();
-            });
+            }).catch(err => {
+                console.log(`\nUnable to connect (error code : ${err.code}).`);
+                process.exit();
+            })
         }
     }])
 }
@@ -145,7 +148,7 @@ function getDepOption(row_options) {
                 ],
                 rows: row_options
             }
-        ])
+        ]);
 }
 
 
@@ -167,10 +170,16 @@ async function main() {
     if (number_of_packages === 0) return;
 
     const row_options = [];
+
+    console.log(chalk.yellow('\n>>>>>'));
+
+    console.log(chalk.blue.bold('Selected Packages :'));
+
     for (let i = 0; i < number_of_packages; ++i) {
-        console.log('+ ' + packages[i]);
+        console.log(chalk.green(' + ' + packages[i]));
         row_options.push({ name: packages[i], value: i });
     }
+    console.log(chalk.yellow('>>>>>\n'));
 
     ////////////////////////////////////////
     // Function to get scope options(local or global)
@@ -183,6 +192,7 @@ async function main() {
     ////////////////////////////////////////
     // Creating commands
     const commands = [];
+
     for (let i = 0; i < number_of_packages; ++i) {
         const command = `npm install ${packages[i]} ${scopes[i] ? '' : scopes[i]} ${dep_option[i] ? '' : dep_option[i]}`;
         commands.push(command);
@@ -193,27 +203,41 @@ async function main() {
     const exec_command = util.promisify(exec);
 
     for (let i = 0; i < number_of_packages; ++i) {
+        console.log(chalk.yellow('\n>>>>>'));
+        const command = `npm install ${packages[i]} ${scopes[i] ? scopes[i] : ''} ${dep_option[i] ? dep_option[i] : ''}`;
+
+        console.log(chalk.blue.bold(`Executing : `) + command);
+
         const spinner = ora(`Installing ${packages[i]}`).start();
 
         setTimeout(() => {
             spinner.color = 'red';
             spinner.text = `Installing ${packages[i]}`;
-        }, 1000);
+        }, 500);
+
         try {
-            const { stdout, stderr } = await exec_command(commands[i]);
+            const { stdout, stderr } = await exec_command(command);
             if (stderr) {
-                spinner.warn(`Installed ${packages[i]}`);
-                console.log(stderr)
+                spinner.warn(`Warning ${packages[i]}`);
+                console.log(chalk.yellow(stderr))
             } else {
                 spinner.succeed(`Installed ${packages[i]}`);
-                console.log(stdout);
+                console.log(chalk.green(stdout));
             }
         } catch (err) {
             spinner.fail(`Error installing ${packages[i]}`);
-            console.log(err.stderr);
+            console.log(chalk.red(err.stderr));
         }
+
+        console.log(chalk.yellow('>>>>>\n'));
     }
 }
+
+
+
+/*****************
+ * Require Statements
+ */
 
 module.exports = {
     main
