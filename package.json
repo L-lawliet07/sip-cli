@@ -3,9 +3,17 @@
   "version": "0.0.0",
   "description": "Terminal assistant to search and install node packages.",
   "main": "index.js",
+  "preferGlobal": true,
+  "bin": "./bin/run.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "L-lawliet07",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^5.1.0",
+    "inquirer-checkbox-plus-prompt": "^1.0.1",
+    "inquirer-table-prompt": "^0.2.1",
+    "ora": "^4.0.3"
+  }
 }
