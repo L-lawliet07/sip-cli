@@ -1,7 +1,9 @@
 
-![Logo](./assets/sip.jpg)
+<img src='./assets/sip.jpg'></img>
 ---
-<img style='display:block; margin: auto' src='./assets/sip.gif'></img>
+<p align = 'center'>
+    <img src='./assets/sip.gif'></img>
+</p>
 ---
 # About SIP
 ☕️ **`sip`** is a terminal assistant to <span style = 'color:red'>`S`</span>earch and <span style = 'color:red'>`I`</span>nstall npm <span style = 'color:red'>`P`</span>ackages.
