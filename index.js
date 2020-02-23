@@ -7,6 +7,7 @@
 /*****************
  * Require Statements
  */
+
 const util = require('util');
 
 const { exec } = require('child_process');
@@ -25,6 +26,8 @@ const table = require("inquirer-table-prompt");
 const ora = require('ora');
 
 const chalk = require('chalk');
+
+
 
 /*****************
  * Function to search and select packages
@@ -52,7 +55,7 @@ function getPackage() {
             return new Promise(function (resolve, reject) {
 
                 /////////////////////////////////////////
-                // Making a https get request to node api
+                // Making a https get request to npms api
                 const req = https.get(`https://api.npms.io/v2/search/suggestions?q=${input}`, (resp) => {
 
                     let data = '';
@@ -60,24 +63,28 @@ function getPackage() {
                         data += chunk;
                     });
 
+                    /////////////////////////////////////
+                    //Data received
                     resp.on('end', () => {
+
                         data = JSON.parse(data);
                         const real_data = data.map((el) => {
                             return el.package.name + '@' + el.package.version;
                         });
                         return resolve(real_data);
                     });
+
                 });
 
+                /////////////////////////////////////////
+                // In case of error dont show anything
                 req.on('error', function (err) {
-                    return reject(err);
+                    //Return Empty Array
+                    return resolve([]);
                 });
-
                 req.end();
-            }).catch(err => {
-                console.log(`\nUnable to connect (error code : ${err.code}).`);
-                process.exit();
             })
+
         }
     }])
 }
@@ -154,7 +161,7 @@ function getDepOption(row_options) {
 
 
 /*****************
- * Function to execute install statement
+ * Main function
  */
 
 async function main() {
@@ -179,6 +186,7 @@ async function main() {
         console.log(chalk.green(' + ' + packages[i]));
         row_options.push({ name: packages[i], value: i });
     }
+
     console.log(chalk.yellow('>>>>>\n'));
 
     ////////////////////////////////////////
@@ -190,20 +198,13 @@ async function main() {
     const dep_option = (await getDepOption(row_options)).dependencies;
 
     ////////////////////////////////////////
-    // Creating commands
-    const commands = [];
-
-    for (let i = 0; i < number_of_packages; ++i) {
-        const command = `npm install ${packages[i]} ${scopes[i] ? '' : scopes[i]} ${dep_option[i] ? '' : dep_option[i]}`;
-        commands.push(command);
-    }
-
-    ////////////////////////////////////////
     //Promosifing exec command
     const exec_command = util.promisify(exec);
 
     for (let i = 0; i < number_of_packages; ++i) {
+
         console.log(chalk.yellow('\n>>>>>'));
+
         const command = `npm install ${packages[i]} ${scopes[i] ? scopes[i] : ''} ${dep_option[i] ? dep_option[i] : ''}`;
 
         console.log(chalk.blue.bold(`Executing : `) + command);
@@ -216,14 +217,24 @@ async function main() {
         }, 500);
 
         try {
+
+            ////////////////////////////////////////////
+            // Execute command
             const { stdout, stderr } = await exec_command(command);
+
+            ////////////////////////////////////////////
+            // If error occures
             if (stderr) {
                 spinner.warn(`Warning ${packages[i]}`);
                 console.log(chalk.yellow(stderr))
-            } else {
+            }
+            ////////////////////////////////////////////
+            // In case of success
+            else {
                 spinner.succeed(`Installed ${packages[i]}`);
                 console.log(chalk.green(stdout));
             }
+
         } catch (err) {
             spinner.fail(`Error installing ${packages[i]}`);
             console.log(chalk.red(err.stderr));
