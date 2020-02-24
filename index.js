@@ -41,7 +41,7 @@ function getPackage() {
 
         type: 'checkbox-plus',
         name: 'package',
-        message: 'Enter Package Name:',
+        message: '🔍️  ' + chalk.blue.bold('Enter Package Name:'),
         pageSize: 5,
         highlight: true,
         searchable: true,
@@ -51,7 +51,10 @@ function getPackage() {
         source: function (answersSoFar, input) {
 
             input = input || '';
-            if (input == '') return Promise.resolve([]);
+            if (input == '') {
+                return Promise.resolve([]);
+            }
+
             return new Promise(function (resolve, reject) {
 
                 /////////////////////////////////////////
@@ -59,6 +62,8 @@ function getPackage() {
                 const req = https.get(`https://api.npms.io/v2/search/suggestions?q=${input}`, (resp) => {
 
                     let data = '';
+                    /////////////////////////////////////
+                    // Receiving Data
                     resp.on('data', (chunk) => {
                         data += chunk;
                     });
@@ -67,6 +72,7 @@ function getPackage() {
                     //Data received
                     resp.on('end', () => {
 
+                        //Parsing json data
                         data = JSON.parse(data);
                         const real_data = data.map((el) => {
                             return el.package.name + '@' + el.package.version;
@@ -82,11 +88,12 @@ function getPackage() {
                     //Return Empty Array
                     return resolve([]);
                 });
+
                 req.end();
-            })
+            });
 
         }
-    }])
+    }]);
 }
 
 
@@ -105,7 +112,7 @@ function getScope(row_options) {
             {
                 type: "table",
                 name: "scope",
-                message: "Choose Scope",
+                message: '🎭️  ' + chalk.blue.bold("Choose Scope: "),
                 columns: [
                     {
                         name: "Local",
@@ -118,7 +125,7 @@ function getScope(row_options) {
                 ],
                 rows: row_options
             }
-        ])
+        ]);
 }
 
 
@@ -134,7 +141,7 @@ function getDepOption(row_options) {
             {
                 type: "table",
                 name: "dependencies",
-                message: "Choose Installation Option:",
+                message: '💀️  ' + chalk.blue.bold("Choose Installation Option:"),
                 columns: [
                     {
                         name: "save-prod",
@@ -174,13 +181,17 @@ async function main() {
 
     ////////////////////////////////////////
     // I no package is selected quit
-    if (number_of_packages === 0) return;
+    if (number_of_packages === 0) {
+
+        console.log('🤷‍♂️️  ' + chalk.yellow.underline('No package selected '));
+        return;
+    }
 
     const row_options = [];
 
     console.log(chalk.yellow('\n>>>>>'));
 
-    console.log(chalk.blue.bold('Selected Packages :'));
+    console.log(chalk.blue.bold.underline('Selected Packages :'));
 
     for (let i = 0; i < number_of_packages; ++i) {
         console.log(chalk.green(' + ' + packages[i]));
@@ -213,7 +224,7 @@ async function main() {
 
         setTimeout(() => {
             spinner.color = 'red';
-            spinner.text = `Installing ${packages[i]}`;
+            spinner.text = `Installing ${packages[i]} 🤺️`;
         }, 500);
 
         try {
@@ -247,7 +258,7 @@ async function main() {
 
 
 /*****************
- * Require Statements
+ * Export Statement
  */
 
 module.exports = {
