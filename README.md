@@ -1,8 +1,8 @@
 
-<img src='./assets/sip.jpg'></img>
----
 
+---
 <p align = 'center'>
+<img src='./assets/logo.png'></img>
     <img src='./assets/sip.gif'></img>
 </p>
 
@@ -24,7 +24,7 @@ $ sip
 
 
 # Features
-* 🕵‍♀️️ **Search npm packages** : Search npm packages fast and efficiently using npms search [api]('https://api-docs.npms.io/').
+* 🕵‍♀️️ **Search npm packages** : Search npm packages fast and efficiently using npms search [api](https://api-docs.npms.io/).
 <br><br>
 * 👩‍👧‍👧️ **Install multiple packages** : Easily search and install multiple npm packages with one click.
 <br><br>
