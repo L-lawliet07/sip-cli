@@ -1,20 +1,30 @@
 {
-  "name": "sip",
-  "version": "0.0.0",
-  "description": "Terminal assistant to search and install node packages.",
-  "main": "index.js",
-  "preferGlobal": true,
-  "bin": "./bin/run.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "L-lawliet07",
-  "license": "ISC",
-  "dependencies": {
-    "chalk": "^3.0.0",
-    "inquirer": "^5.1.0",
-    "inquirer-checkbox-plus-prompt": "^1.0.1",
-    "inquirer-table-prompt": "^0.2.1",
-    "ora": "^4.0.3"
-  }
+    "name": "sip",
+    "version": "0.0.0",
+    "description": "Terminal assistant to search and install npm packages.",
+    "main": "index.js",
+    "preferGlobal": true,
+    "bin": "./bin/run.js",
+    "homepage" : "https://github.com/L-lawliet07/sip#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/L-lawliet07/sip.git"
+    },
+    "keywords": [
+        "CLI",
+        "search",
+        "npm-packages",
+        "install",
+        "assistant",
+        "interactive"
+    ],
+    "author": "L-lawliet07",
+    "license": "ISC",
+    "dependencies": {
+        "chalk": "^3.0.0",
+        "inquirer": "^5.1.0",
+        "inquirer-checkbox-plus-prompt": "^1.0.1",
+        "inquirer-table-prompt": "^0.2.1",
+        "ora": "^4.0.3"
+    }
 }
