@@ -2,8 +2,11 @@
 
 ---
 <p align = 'center'>
-<img src='./assets/logo.png'></img>
-    <img src='./assets/sip.gif'></img>
+<img src='./assets/logo.png'>
+</p>
+
+<p align = 'center'>
+<img src='./assets/sip.gif'>
 </p>
 
 ---
@@ -12,14 +15,14 @@
 **`sip`** is a terminal assistant to <span style = 'color:red'>`S`</span>earch and <span style = 'color:red'>`I`</span>nstall npm <span style = 'color:red'>`P`</span>ackages.
 
 # Installation
-## Using [npm]('#')
+## Using [npm](https://www.npmjs.com/package/sip-cli)
 ### `Install` globally.
 ``` bash
-npm install -g sipjs
+npm install -g sip-cli
 ```
 # Usage
 ``` bash
-$ sipjs
+$ sip-cli
 ```
 
 

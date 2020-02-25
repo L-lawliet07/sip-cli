@@ -1,14 +1,14 @@
 {
-    "name": "sipjs",
-    "version": "0.0.0",
+    "name": "sip-cli",
+    "version": "0.0.2",
     "description": "Terminal assistant to search and install npm packages.",
     "main": "index.js",
     "preferGlobal": true,
     "bin": "./bin/run.js",
-    "homepage": "https://github.com/L-lawliet07/sip#readme",
+    "homepage": "https://github.com/L-lawliet07/sip-cli#readme",
     "repository": {
         "type": "git",
-        "url": "https://github.com/L-lawliet07/sip.git"
+        "url": "https://github.com/L-lawliet07/sip-cli.git"
     },
     "keywords": [
         "CLI",
