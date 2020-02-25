@@ -15,11 +15,11 @@
 ## Using [npm]('#')
 ### `Install` globally.
 ``` bash
-npm install -g sip
+npm install -g sipjs
 ```
 # Usage
-``` bashS
-$ sip
+``` bash
+$ sipjs
 ```
 
 
@@ -36,5 +36,4 @@ $ sip
 
 You guys can do whatever you want to do with this code. I won't mind. 😁️
 
----
 ---
