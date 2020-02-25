@@ -1,26 +1,29 @@
 
 
----
-<p align = 'center'>
-<img src='./assets/logo.png'>
-</p>
+<!-- ![logo](./assets/logo.png) -->
 
-<p align = 'center'>
-<img src='./assets/sip.gif'>
-</p>
+<img src="./assets/sip.gif" />
 
----
+<!-- ![gif](./assets/sip.gif) -->
+
+
 
 # About SIP
+
 **`sip`** is a terminal assistant to <span style = 'color:red'>`S`</span>earch and <span style = 'color:red'>`I`</span>nstall npm <span style = 'color:red'>`P`</span>ackages.
 
 # Installation
+
 ## Using [npm](https://www.npmjs.com/package/sip-cli)
+
 ### `Install` globally.
+
 ``` bash
 npm install -g sip-cli
 ```
+
 # Usage
+
 ``` bash
 $ sip-cli
 ```
