@@ -1,6 +1,6 @@
 {
     "name": "sip-cli",
-    "version": "0.0.15",
+    "version": "0.0.19",
     "description": "Terminal assistant to search and install npm packages.",
     "main": "index.js",
     "preferGlobal": true,

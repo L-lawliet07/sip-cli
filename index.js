@@ -253,6 +253,7 @@ async function main() {
 
         console.log(chalk.yellow('>>>>>\n'));
     }
+    process.exit(0);
 }
 
 
