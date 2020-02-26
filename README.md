@@ -52,10 +52,6 @@ $ sip-cli
 * 👶️ **Easy to use** : Easy to use. ( made by a noob for other noobs ). 
   
 
-* 🌌️ **Interactive** : Interactive cli.
-
-## Note 😇️
-
-You guys can do whatever you want to do with this code. I won't mind. 😁️
+* 🌌️ **Interactive** : Interactive cli ( thanks to [inquirer](https://www.npmjs.com/package/inquirer) and [chalk](https://www.npmjs.com/package/chalk) ).
 
 ---
