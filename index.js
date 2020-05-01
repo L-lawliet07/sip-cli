@@ -14,6 +14,8 @@ const { exec } = require('child_process');
 
 const https = require('https');
 
+const readline = require('readline')
+
 const inquirer = require('inquirer');
 
 //inquirer checkbox plugin
@@ -27,7 +29,11 @@ const ora = require('ora');
 
 const chalk = require('chalk');
 
+const open = require('open');
 
+
+// Global variable user to map package name to the links
+const mapping = {};
 
 /*****************
  * Function to search and select packages
@@ -75,6 +81,11 @@ function getPackage() {
                         //Parsing json data
                         data = JSON.parse(data);
                         const real_data = data.map((el) => {
+                            mapping[el.package.name + '@' + el.package.version] = {
+                                'homepage' : el.package.links.homepage,
+                                'repository' : el.package.links.repository,
+                                'npm': el.package.links.npm
+                            };
                             return el.package.name + '@' + el.package.version;
                         });
                         return resolve(real_data);
@@ -168,6 +179,51 @@ function getDepOption(row_options) {
 
 
 /*****************
+ * Function to listen to keypress event
+ */
+
+function keypress_listen ( packages ) {
+
+    /////////////////////////////////////////
+    // enabling stdin to emit events
+    readline.emitKeypressEvents(process.stdin);
+    process.stdin.setRawMode(true);
+    
+    /////////////////////////////////////////
+    // listen to keypress event
+    process.stdin.on('keypress', async (str, key) => {
+
+        // Open homepage of packages (ctrl + w)
+        if (key.ctrl && key.name === 'w') {
+            for ( let i = 0; i < packages.length; ++i ) {
+                if ( mapping[packages[i]].homepage ) {
+                    await open(mapping[packages[i]].homepage);
+                }
+            } 
+        }
+
+        // Open repository of packages (ctrl + r)
+        if (key.ctrl && key.name === 'r') {
+            for ( let i = 0; i < packages.length; ++i ) {
+                if ( mapping[packages[i]].repository ) {
+                    await open(mapping[packages[i]].repository);
+                }
+            } 
+        }
+
+        // Open repository for particular package (ctrl + #)
+        if (key.meta && key.name > '0' && key.name <= '9' ) {
+            let index = parseInt(key.name) - 1;
+            if ( index < packages.length  && mapping[ packages[index] ].repository ) {
+                await open(mapping[packages[index]].repository);
+            }
+        }
+    });
+}
+
+
+
+/*****************
  * Main function
  */
 
@@ -184,8 +240,10 @@ async function main() {
     if (number_of_packages === 0) {
 
         console.log('🤷‍♂️️  ' + chalk.yellow.underline('No package selected '));
-        return;
+        process.exit(0);
     }
+
+    keypress_listen( packages );
 
     const row_options = [];
 

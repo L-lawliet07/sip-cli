@@ -21,10 +21,11 @@
     "author": "L-lawliet07",
     "license": "ISC",
     "dependencies": {
-        "chalk": "^3.0.0",
+        "chalk": "^4.0.0",
         "inquirer": "^5.1.0",
         "inquirer-checkbox-plus-prompt": "^1.0.1",
         "inquirer-table-prompt": "^0.2.1",
+        "open": "^7.0.3",
         "ora": "^4.0.3"
     }
 }
