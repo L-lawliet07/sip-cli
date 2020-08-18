@@ -32,7 +32,7 @@ const chalk = require('chalk');
 const open = require('open');
 
 
-// Global variable user to map package name to the links
+// Global variable uses to map package name to the links
 const mapping = {};
 
 /*****************
@@ -82,8 +82,8 @@ function getPackage() {
                         data = JSON.parse(data);
                         const real_data = data.map((el) => {
                             mapping[el.package.name + '@' + el.package.version] = {
-                                'homepage' : el.package.links.homepage,
-                                'repository' : el.package.links.repository,
+                                'homepage': el.package.links.homepage,
+                                'repository': el.package.links.repository,
                                 'npm': el.package.links.npm
                             };
                             return el.package.name + '@' + el.package.version;
@@ -182,39 +182,39 @@ function getDepOption(row_options) {
  * Function to listen to keypress event
  */
 
-function keypress_listen ( packages ) {
+function keypress_listen(packages) {
 
     /////////////////////////////////////////
     // enabling stdin to emit events
     readline.emitKeypressEvents(process.stdin);
     process.stdin.setRawMode(true);
-    
+
     /////////////////////////////////////////
     // listen to keypress event
     process.stdin.on('keypress', async (str, key) => {
 
         // Open homepage of packages (ctrl + w)
         if (key.ctrl && key.name === 'w') {
-            for ( let i = 0; i < packages.length; ++i ) {
-                if ( mapping[packages[i]].homepage ) {
+            for (let i = 0; i < packages.length; ++i) {
+                if (mapping[packages[i]].homepage) {
                     await open(mapping[packages[i]].homepage);
                 }
-            } 
+            }
         }
 
         // Open repository of packages (ctrl + r)
         if (key.ctrl && key.name === 'r') {
-            for ( let i = 0; i < packages.length; ++i ) {
-                if ( mapping[packages[i]].repository ) {
+            for (let i = 0; i < packages.length; ++i) {
+                if (mapping[packages[i]].repository) {
                     await open(mapping[packages[i]].repository);
                 }
-            } 
+            }
         }
 
         // Open repository for particular package (ctrl + #)
-        if (key.meta && key.name > '0' && key.name <= '9' ) {
+        if (key.meta && key.name > '0' && key.name <= '9') {
             let index = parseInt(key.name) - 1;
-            if ( index < packages.length  && mapping[ packages[index] ].repository ) {
+            if (index < packages.length && mapping[packages[index]].repository) {
                 await open(mapping[packages[index]].repository);
             }
         }
@@ -243,7 +243,7 @@ async function main() {
         process.exit(0);
     }
 
-    keypress_listen( packages );
+    keypress_listen(packages);
 
     const row_options = [];
 

@@ -49,9 +49,23 @@ $ sip-cli
 * 👩‍👧‍👧️ **Install multiple packages** : Easily search and install multiple npm packages with one click.
 
 
+* 🍜  **Shortcut keys** : With one click we can open package repository and homepage.
+  
+    | Key          | Description                                          |
+    | ------------ | ---------------------------------------------------- |
+    | Ctrl + w     | Shortcut key to open package website.                |
+    | Ctrl + shift + r     | Shortcut key to open package repository.             |
+    | Alt + [1..9] | Shortcut key to open particular package repository . |
+
 * 👶️ **Easy to use** : Easy to use. ( made by a noob for other noobs ). 
   
 
 * 🌌️ **Interactive** : Interactive cli ( thanks to [inquirer](https://www.npmjs.com/package/inquirer) and [chalk](https://www.npmjs.com/package/chalk) ).
 
 ---
+
+<div align="center" style="background: #f3f3f3; padding: 10px;"> 
+
+  &lt; C'mon Fork me [yeah]() /&gt;
+
+</div>
