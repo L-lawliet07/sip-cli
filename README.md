@@ -64,8 +64,8 @@ $ sip-cli
 
 ---
 
-<div align="center" style="background: #f3f3f3; padding: 10px;"> 
+<div align="center" style=" padding: 10px;"> 
 
-  &lt; C'mon Fork me [yeah]() /&gt;
+  &lt; C'mon Fork it /&gt;
 
 </div>
